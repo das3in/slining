@@ -1,25 +1,23 @@
-# Suspenders [![Build Status](https://secure.travis-ci.org/thoughtbot/suspenders.svg?branch=master)](http://travis-ci.org/thoughtbot/suspenders)
+# Slining [![Build Status](https://secure.travis-ci.org/vaporware/slining.svg?branch=master)](http://travis-ci.org/vaporware/slining)
 
-Suspenders is the base Rails application used at
-[thoughtbot](http://thoughtbot.com).
-
-  ![Suspenders boy](http://media.tumblr.com/1TEAMALpseh5xzf0Jt6bcwSMo1_400.png)
+Slining is the Silver Lining to Vaporware's Rails development, i.e. the base Rails application used at
+[vaporware](http://vaporwa.re). It's a forked project from [thoughtbot's suspenders](http://github.com/thoughtbot/suspenders).
 
 ## Installation
 
-First install the suspenders gem:
+First install the slining gem:
 
-    gem install suspenders
+    gem install slining
 
 Then run:
 
-    suspenders projectname
+    slining projectname
 
 This will create a Rails app in `projectname` using the latest version of Rails.
 
 ## Gemfile
 
-To see the latest and greatest gems, look at Suspenders'
+To see the latest and greatest gems, look at Slining's
 [Gemfile](templates/Gemfile.erb), which will be appended to the default
 generated projectname/Gemfile.
 
@@ -85,7 +83,7 @@ And testing gems like:
 
 ## Other goodies
 
-Suspenders also comes with:
+Slining also comes with:
 
 * The [`./bin/setup`][setup] convention for new developer setup
 * The `./bin/deploy` convention for deploying to Heroku
@@ -115,7 +113,7 @@ Suspenders also comes with:
 
 You can optionally create Heroku staging and production apps:
 
-    suspenders app --heroku true
+    slining app --heroku true
 
 This:
 
@@ -132,7 +130,7 @@ This:
 
 You can optionally specify alternate Heroku flags:
 
-    suspenders app \
+    slining app \
       --heroku true \
       --heroku-flags "--region eu --addons newrelic,pgbackups,sendgrid,ssl"
 
@@ -145,15 +143,15 @@ See all possible Heroku flags:
 This will initialize a new git repository for your Rails app. You can
 bypass this with the `--skip-git` option:
 
-    suspenders app --skip-git true
+    slining app --skip-git true
 
 ## GitHub
 
-You can optionally create a GitHub repository for the suspended Rails app. It
+You can optionally create a GitHub repository for the slining Rails app. It
 requires that you have [Hub](https://github.com/github/hub) on your system:
 
     curl http://hub.github.com/standalone -sLo ~/bin/hub && chmod +x ~/bin/hub
-    suspenders app --github organization/project
+    slining app --github organization/project
 
 This has the same effect as running:
 
@@ -169,10 +167,10 @@ And if you'd rather not use spring, add `DISABLE_SPRING=1` to your login file.
 
 ## Dependencies
 
-Suspenders requires the latest version of Ruby.
+Slining requires the latest version of Ruby.
 
-Some gems included in Suspenders have native extensions. You should have GCC
-installed on your machine before generating an app with Suspenders.
+Some gems included in Slining have native extensions. You should have GCC
+installed on your machine before generating an app with Slining.
 
 Use [OS X GCC Installer](https://github.com/kennethreitz/osx-gcc-installer/) for
 Snow Leopard (OS X 10.6).
@@ -190,7 +188,7 @@ PostgreSQL needs to be installed and running for the `db:create` rake task.
 ## Issues
 
 If you have problems, please create a
-[GitHub Issue](https://github.com/thoughtbot/suspenders/issues).
+[GitHub Issue](https://github.com/thoughtbot/slining/issues).
 
 ## Contributing
 
@@ -198,33 +196,12 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Thank you, [contributors]!
 
-[contributors]: https://github.com/thoughtbot/suspenders/graphs/contributors
-
-## Need Help?
-
-We offer 1-on-1 coaching. We can help you set up a new Rails application, write
-your first feature, and get up and running on Heroku. [Get in touch].
-
-[Get in touch]: http://coaching.thoughtbot.com/rails/?utm_source=github
+[contributors]: https://github.com/thoughtbot/slining/graphs/contributors
 
 ## License
+Slining is Copyright © 2015+ vaporware.
 
-Suspenders is Copyright © 2008-2015 thoughtbot.
-It is free software,
-and may be redistributed under the terms specified in the [LICENSE] file.
+Slining is a forked project from Suspenders. Suspenders is Copyright © 2008-2015 thoughtbot.
+It is free software, and may be redistributed under the terms specified in the [LICENSE] file.
 
 [LICENSE]: LICENSE
-
-## About thoughtbot
-
-![thoughtbot](https://thoughtbot.com/logo.png)
-
-Suspenders is maintained and funded by thoughtbot, inc.
-The names and logos for thoughtbot are trademarks of thoughtbot, inc.
-
-We love open source software!
-See [our other projects][community].
-We are [available for hire][hire].
-
-[community]: https://thoughtbot.com/community?utm_source=github
-[hire]: https://thoughtbot.com?utm_source=github

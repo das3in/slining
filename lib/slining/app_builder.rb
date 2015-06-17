@@ -1,6 +1,6 @@
-module Suspenders
+module Slining
   class AppBuilder < Rails::AppBuilder
-    include Suspenders::Actions
+    include Slining::Actions
 
     def readme
       template 'README.md.erb', 'README.md'
@@ -162,7 +162,7 @@ end
     end
 
     def create_application_layout
-      template 'suspenders_layout.html.erb.erb',
+      template 'slining_layout.html.erb.erb',
         'app/views/layouts/application.html.erb',
         force: true
     end
@@ -182,7 +182,7 @@ end
     end
 
     def set_ruby_to_version_being_used
-      create_file '.ruby-version', "#{Suspenders::RUBY_VERSION}\n"
+      create_file '.ruby-version', "#{Slining::RUBY_VERSION}\n"
     end
 
     def setup_heroku_specific_gems
@@ -305,7 +305,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
 
     def gitignore_files
       remove_file '.gitignore'
-      copy_file 'suspenders_gitignore', '.gitignore'
+      copy_file 'slining_gitignore', '.gitignore'
       [
         'app/views/pages',
         'spec/lib',

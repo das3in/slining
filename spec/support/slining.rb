@@ -1,4 +1,4 @@
-module SuspendersTestHelpers
+module SliningTestHelpers
   APP_NAME = "dummy_app"
 
   def remove_project_directory
@@ -9,12 +9,12 @@ module SuspendersTestHelpers
     FileUtils.mkdir_p(tmp_path)
   end
 
-  def run_suspenders(arguments = nil)
+  def run_slining(arguments = nil)
     Dir.chdir(tmp_path) do
       Bundler.with_clean_env do
         ENV['TESTING'] = '1'
 
-        %x(#{suspenders_bin} #{APP_NAME} #{arguments})
+        %x(#{slining_bin} #{APP_NAME} #{arguments})
       end
     end
   end
@@ -39,8 +39,8 @@ module SuspendersTestHelpers
     @tmp_path ||= Pathname.new("#{root_path}/tmp")
   end
 
-  def suspenders_bin
-    File.join(root_path, 'bin', 'suspenders')
+  def slining_bin
+    File.join(root_path, 'bin', 'slining')
   end
 
   def root_path
