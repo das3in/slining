@@ -1,4 +1,4 @@
-# Slining [![Build Status](https://secure.travis-ci.org/vaporware/slining.svg?branch=master)](http://travis-ci.org/vaporware/slining)
+# Slining [![Build Status](https://secure.travis-ci.org/vaporware/slining.svg?branch=master)](http://travis-ci.org/vaporware/slining) [![Gem Version](https://badge.fury.io/rb/slining.svg)](http://badge.fury.io/rb/slining) [![Gem Version](https://badge.fury.io/rb/slining.svg)](http://badge.fury.io/rb/slining) [![Code Climate](https://codeclimate.com/github/vaporware/slining/badges/gpa.svg)](https://codeclimate.com/github/vaporware/slining) [![Test Coverage](https://codeclimate.com/github/vaporware/slining/badges/coverage.svg)](https://codeclimate.com/github/vaporware/slining/coverage) 
 
 Slining is the Silver Lining to Vaporware's Rails development, i.e. the base Rails application used at
 [vaporware](http://vaporwa.re). It's a forked project from [thoughtbot's suspenders](http://github.com/thoughtbot/suspenders).
@@ -25,12 +25,14 @@ It includes application gems like:
 
 * [Airbrake](https://github.com/airbrake/airbrake) for exception notification
 * [Autoprefixer Rails](https://github.com/ai/autoprefixer-rails) for CSS vendor prefixes
+* [Bootstrap](getbootstrap.com) for fast frontend prototyping
 * [Delayed Job](https://github.com/collectiveidea/delayed_job) for background
   processing
 * [Email Validator](https://github.com/balexand/email_validator) for email
   validation
 * [Flutie](https://github.com/thoughtbot/flutie) for `page_title` and `body_class` view
   helpers
+* [HAML](http://haml.info/) for cleaner view code
 * [High Voltage](https://github.com/thoughtbot/high_voltage) for static pages
 * [jQuery Rails](https://github.com/rails/jquery-rails) for jQuery
 * [New Relic RPM](https://github.com/newrelic/rpm) for monitoring performance
@@ -46,7 +48,7 @@ It includes application gems like:
   and style
 * [Title](https://github.com/calebthompson/title) for storing titles in
   translations
-* [Unicorn](https://github.com/defunkt/unicorn) to serve HTTP requests
+* [Unicorn](https://github.com/defunkt/unicorn) to serve HTTP requests.
 
 And development gems like:
 
