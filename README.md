@@ -1,4 +1,4 @@
-# Slining [![Build Status](https://secure.travis-ci.org/vaporware/slining.svg?branch=master)](http://travis-ci.org/vaporware/slining) [![Gem Version](https://badge.fury.io/rb/slining.svg)](http://badge.fury.io/rb/slining) [![Gem Version](https://badge.fury.io/rb/slining.svg)](http://badge.fury.io/rb/slining) [![Code Climate](https://codeclimate.com/github/vaporware/slining/badges/gpa.svg)](https://codeclimate.com/github/vaporware/slining) [![Test Coverage](https://codeclimate.com/github/vaporware/slining/badges/coverage.svg)](https://codeclimate.com/github/vaporware/slining/coverage) 
+# Slining
 
 Slining is the Silver Lining to Vaporware's Rails development, i.e. the base Rails application used at
 [vaporware](http://vaporwa.re). It's a forked project from [thoughtbot's suspenders](http://github.com/thoughtbot/suspenders).
@@ -164,6 +164,14 @@ And if you'd rather not use spring, add `DISABLE_SPRING=1` to your login file.
 
 ## Dependencies
 
+[![Gem Version](http://img.shields.io/gem/v/slining.svg?style=flat)][gem]
+[![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license]
+[![Dependency Status](http://img.shields.io/gemnasium/vaporware/slining.svg?style=flat)][gemnasium]
+[![Build Status](http://img.shields.io/travis/vaporware/slining.svg?style=flat)][travis]
+[![Code Coverage](http://img.shields.io/coveralls/vaporware/slining.svg?style=flat)][coveralls]
+[![Code Quality](http://img.shields.io/codeclimate/github/vaporware/slining.svg?style=flat)][codeclimate]
+[![Gittip](http://img.shields.io/gittip/slining.svg?style=flat)][gittip]
+
 Slining requires the latest version of Ruby.
 
 Some gems included in Slining have native extensions. You should have GCC
@@ -193,12 +201,16 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Thank you, [contributors]!
 
-[contributors]: https://github.com/vaporware/slining/graphs/contributors
-
 ## License
-Slining is Copyright © 2015+ vaporware.
+Slining is Copyright © 2015+ vaporware. MIT Licensed, see [LICENSE] for details.
 
-Slining is a forked project from Suspenders. Suspenders is Copyright © 2008-2015 thoughtbot.
-It is free software, and may be redistributed under the terms specified in the [LICENSE] file.
-
-[LICENSE]: LICENSE
+[gem]: https://rubygems.org/gems/slining
+[travis]: http://travis-ci.org/vaporware/slining
+[coveralls]: https://coveralls.io/r/vaporware/slining
+[gemnasium]: https://gemnasium.com/vaporware/slining
+[codeclimate]: https://codeclimate.com/github/vaporware/slining
+[gittip]: https://www.gittip.com/slining/
+[rubyinstaller]: http://rubyinstaller.org/
+[rubydoc]: http://rubydoc.info/github/vaporware/slining
+[LICENSE]: https://github.com/vaporware/slining/blob/master/LICENSE.md
+[contributors]: https://github.com/vaporware/slining/graphs/contributors
