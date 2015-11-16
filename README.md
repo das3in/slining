@@ -92,7 +92,7 @@ Slining also comes with:
 * [t() and l() in specs without prefixing with I18n][i18n]
 * An automatically-created `SECRET_KEY_BASE` environment variable in all
   environments
-* Configuration for [Travis][travis] Continuous Integration (tests)
+* Configuration for [CircleCI][circle] Continuous Integration (tests)
 * Configuration for [Hound][hound] Continuous Integration (style)
 * The analytics adapter [Segment][segment] (and therefore config for Google
   Analytics, Intercom, Facebook Ads, Twitter Ads, etc.)
@@ -102,7 +102,7 @@ Slining also comes with:
 [pool]: https://devcenter.heroku.com/articles/concurrency-and-database-connections
 [binstub]: https://github.com/thoughtbot/suspenders/pull/282
 [i18n]: https://github.com/thoughtbot/suspenders/pull/304
-[travis]: http://docs.travis-ci.com/user/travis-pro/
+[circle]: https://circleci.com/docs
 [hound]: https://houndci.com
 [segment]: https://segment.com
 
@@ -167,10 +167,9 @@ And if you'd rather not use spring, add `DISABLE_SPRING=1` to your login file.
 [![Gem Version](http://img.shields.io/gem/v/slining.svg?style=flat)][gem]
 [![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license]
 [![Dependency Status](http://img.shields.io/gemnasium/vaporware/slining.svg?style=flat)][gemnasium]
-[![Build Status](http://img.shields.io/travis/vaporware/slining.svg?style=flat)][travis]
-[![Code Coverage](http://img.shields.io/coveralls/vaporware/slining.svg?style=flat)][coveralls]
+[![Build Status](https://img.shields.io/circleci/project/vaporware/slining.svg?style=flat)][circleci]
+[![Code Coverage](http://img.shields.io/codeclimate/coverage/github/vaporware/slining.svg?style=flat)][codeclimate]
 [![Code Quality](http://img.shields.io/codeclimate/github/vaporware/slining.svg?style=flat)][codeclimate]
-[![Gittip](http://img.shields.io/gittip/slining.svg?style=flat)][gittip]
 
 Slining requires the latest version of Ruby.
 
@@ -205,11 +204,9 @@ Thank you, [contributors]!
 Slining is Copyright © 2015+ vaporware. MIT Licensed, see [LICENSE] for details.
 
 [gem]: https://rubygems.org/gems/slining
-[travis]: http://travis-ci.org/vaporware/slining
-[coveralls]: https://coveralls.io/r/vaporware/slining
+[circleci]: https://circleci.com/gh/vaporware/slining
 [gemnasium]: https://gemnasium.com/vaporware/slining
 [codeclimate]: https://codeclimate.com/github/vaporware/slining
-[gittip]: https://www.gittip.com/slining/
 [rubyinstaller]: http://rubyinstaller.org/
 [rubydoc]: http://rubydoc.info/github/vaporware/slining
 [LICENSE]: https://github.com/vaporware/slining/blob/master/LICENSE.md

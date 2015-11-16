@@ -209,8 +209,8 @@ end
       copy_file "spec_helper.rb", "spec/spec_helper.rb"
     end
 
-    def configure_travis
-      template 'travis.yml.erb', '.travis.yml'
+    def configure_ci
+      template 'circle.yml.erb', 'circle.yml'
     end
 
     def configure_i18n_for_test_environment
@@ -339,6 +339,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
 # Set up the staging and production apps.
 #{join_heroku_app('staging')}
 #{join_heroku_app('production')}
+git config heroku.remote staging
       SHELL
 
       append_file 'bin/setup', remotes

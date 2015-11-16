@@ -45,4 +45,4 @@ We may suggest changes.
 ## Versions
 
 To update the Ruby version,
-change `.ruby-version` and `.travis.yml`.
+change `.ruby-version`.
