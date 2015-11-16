@@ -1,3 +1,7 @@
+1.2.0 (November 16, 2015)
+* Changed addon references for Heroku
+* Upgraded to Ruby 2.2.3
+
 1.1.0 (June 23, 2015)
 * Added HAML and HAML Rails
 * Added Twitter Bootstrap

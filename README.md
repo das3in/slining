@@ -129,7 +129,7 @@ You can optionally specify alternate Heroku flags:
 
     slining app \
       --heroku true \
-      --heroku-flags "--region eu --addons newrelic,pgbackups,sendgrid,ssl"
+      --heroku-flags "--region eu --addons deployhooks,scheduler,ssl"
 
 See all possible Heroku flags:
 
@@ -156,7 +156,7 @@ This has the same effect as running:
 
 ## Spring
 
-Suspenders uses [spring](https://github.com/rails/spring) by default.
+Slining uses [spring](https://github.com/rails/spring) by default.
 It makes Rails applications load faster, but it might introduce confusing issues
 around stale code not being refreshed.
 If you think your application is running old code, run `spring stop`.
