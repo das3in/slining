@@ -5,7 +5,7 @@ module Slining
     include Slining::Actions
     extend Forwardable
 
-    def delegators :heroku_adapter,
+    def_delegators :heroku_adapter,
                    :set_heroku_remotes,
                    :set_up_heroku_specific_gems,
                    :set_heroku_rails_secrets
