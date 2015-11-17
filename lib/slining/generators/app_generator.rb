@@ -94,6 +94,7 @@ module Slining
       build :configure_rspec
       build :configure_background_jobs_for_rspec
       build :enable_database_cleaner
+      build :provide_shoulda_matchers_config
       build :configure_spec_support_features
       build :configure_ci
       build :configure_i18n_for_test_environment
