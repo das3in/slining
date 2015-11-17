@@ -57,12 +57,16 @@ And development gems like:
   objects
 * [ByeBug](https://github.com/deivid-rodriguez/byebug) for interactively
   debugging behavior
+* [Bullet](https://github.com/flyerhzm/bullet) for help to kill N+1 queries and
+  unused eager loading
 * [Bundler Audit](https://github.com/rubysec/bundler-audit) for scanning the
   Gemfile for insecure dependencies based on published CVEs
 * [Spring](https://github.com/rails/spring) for fast Rails actions via
   pre-loading
 * [Web Console](https://github.com/rails/web-console) for better debugging via
   in-browser IRB consoles.
+* [Quiet Assets](https://github.com/evrone/quiet_assets) for muting assets
+  pipeline log messages
 
 And testing gems like:
 

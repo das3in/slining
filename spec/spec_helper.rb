@@ -13,11 +13,11 @@ RSpec.configure do |config|
   config.include SliningTestHelpers
 
   config.before(:all) do
+    add_fakes_to_path
     create_tmp_directory
   end
 
   config.before(:each) do
-    FakeHeroku.clear!
     FakeGithub.clear!
   end
 end

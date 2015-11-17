@@ -43,6 +43,10 @@ RSpec.describe "Slining a new project with default configuration" do
     expect(File).to exist("#{project_path}/spec/support/action_mailer.rb")
   end
 
+  it "configures capybara-webkit" do
+    expect(File).to exist("#{project_path}/spec/support/capybara_webkit.rb")
+  end
+
   it "adds support file for i18n" do
     expect(File).to exist("#{project_path}/spec/support/i18n.rb")
   end
@@ -73,6 +77,14 @@ RSpec.describe "Slining a new project with default configuration" do
 
     expect(result).to match(
       /^ +config.action_controller.action_on_unpermitted_parameters = :raise$/
+    )
+  end
+
+  it "adds explicit quiet_assets configuration" do
+    result = IO.read("#{project_path}/config/application.rb")
+
+    expect(result).to match(
+      /^ +config.quiet_assets = true$/
     )
   end
 
@@ -129,10 +141,18 @@ RSpec.describe "Slining a new project with default configuration" do
     )
   end
 
+  it "configs bullet gem in development" do
+    test_config = IO.read("#{project_path}/config/environments/development.rb")
+
+    expect(test_config).to match /^ +Bullet.enable = true$/
+    expect(test_config).to match /^ +Bullet.bullet_logger = true$/
+    expect(test_config).to match /^ +Bullet.rails_logger = true$/
+  end
+
   it "adds spring to binstubs" do
     expect(File).to exist("#{project_path}/bin/spring")
 
-    spring_line = /^ +load File.expand_path\("\.\.\/spring", __FILE__\)$/
+    spring_line = /^ +load File.expand_path\('\.\.\/spring', __FILE__\)$/
     bin_stubs = %w(rake rails rspec)
     bin_stubs.each do |bin_stub|
       expect(IO.read("#{project_path}/bin/#{bin_stub}")).to match(spring_line)
@@ -152,6 +172,10 @@ RSpec.describe "Slining a new project with default configuration" do
       expect(file).not_to match(/.*#.*/)
       expect(file).not_to match(/^$\n/)
     end
+  end
+
+  it "copies factories.rb" do 
+    expect(File).to exist("#{project_path}/spec/factories.rb")
   end
 
   def analytics_partial

@@ -1,10 +1,10 @@
-1.2.0 (November 16, 2015)
+1.2.0 (November 17, 2015)
 * Changed addon references for Heroku [upstream-1]
 * Upgraded to Ruby 2.2.3
 * Upgraded to RSpec 3.3 [upstream-2]
-* Replaced TravisCI with CircleCI [upstream-3], [upstream-11]
+* Replaced TravisCI with CircleCI [upstream-3], [upstream-11], [upstream-29]
 * Rename Dev Seeds [upstream-4]
-* Remove Unicorn in favor of Puma, as [recommended by Heroku] [upstream-5]
+* Remove Unicorn in favor of Puma, as [recommended by Heroku] [upstream-5], [upstream-18]
 * Remove Gemfile.lock [upstream-6]
 * Add ctags configuration dotfile [upstream-7]
 * Rename `$HOST` to `$APPLICATION_HOST` for zsh compatibility [upstream-8],[upstream-9]
@@ -12,7 +12,18 @@
 * Abort tests run if `DATABASE_URL` env variable is setup [upstream-12]
 * Fix on port 3000 [upstream-13]
 * Add mandatory environment variables to .sample.env [upstream-14]
-* Provide Shoulda Matchers config
+* Provide Shoulda Matchers config [upstream-15], [upstream-16]
+* Move i18n tasks out of production for performance [upstream-17]
+* Add quiet_assets as development dependency [upstream-19]
+* Generate empty spec/factories.rb file [upstream-20]
+* Fix deprecation warning from capybara-webkit [upstream-21]
+* Slining command line responds to `-v` and `--version` options [upstream-22]
+* Configure simple_form earlier [upstream-23], [upstream-28]
+* Remove old deprecation [upstream-24]
+* Removed action_mailer_host in staging [upstream-25]
+* Cleanup generated `bin/setup` file and rake binstub [upstream-26], [upstream-27]
+* Add bullet as development dependency [upstream-30]
+* Add adapter for heroku actions [upstream-31]
 
 [recommended by Heroku]: https://devcenter.heroku.com/changelog-items/594
 [upstream-1]: https://github.com/thoughtbot/suspenders/commit/f34ab5189300a57e14c28aaeca17bd5573080f1d
@@ -29,6 +40,24 @@
 [upstream-12]: https://github.com/thoughtbot/suspenders/commit/2c069e1e387e3a538aa44a2d235f05e22b0cb03a
 [upstream-13]: https://github.com/thoughtbot/suspenders/commit/4292fea5b17a3ee9a4c1ed11aef4430f0fb71921
 [upstream-14]: https://github.com/thoughtbot/suspenders/commit/efff20491c492715ed6fd8fb2700bbcd8b99709f
+[upstream-15]: https://github.com/thoughtbot/suspenders/commit/af523754f3a27b14ac76e0b9a43391a87541e34c
+[upstream-16]: https://github.com/thoughtbot/suspenders/commit/6f4bc189a91b68dfbb7d37bb669e799602d8d4fd
+[upstream-17]: https://github.com/thoughtbot/suspenders/commit/66d048be81cf5608ea5ee42075bdccf29122256f
+[upstream-18]: https://github.com/thoughtbot/suspenders/commit/bfd75f9f16f8557ddf91a069525d13f7bdc7ce8f
+[upstream-19]: https://github.com/thoughtbot/suspenders/commit/3a06edfd2a66047912cc08a85af32a7dfac16324
+[upstream-20]: https://github.com/thoughtbot/suspenders/commit/0243f89579363fc6a487e46b2ba14b50a9fc23d4
+[upstream-21]: https://github.com/thoughtbot/suspenders/commit/791d938f91bf5fb5ae5ec987d6ceaffbec8f923e
+[upstream-22]: https://github.com/thoughtbot/suspenders/commit/e1a5b2f1101a94a55753020266288b354160cf4f
+[upstream-23]: https://github.com/thoughtbot/suspenders/commit/4b517a11547f880df4b9237c1dd6e96a2cba9cc7
+[upstream-24]: https://github.com/thoughtbot/suspenders/commit/cde3eb1748172c56b6d857a140bc1ed6314c5b34
+[upstream-25]: https://github.com/thoughtbot/suspenders/commit/0a4dfa2c293993272938cf1de80c7934337b52fc
+[upstream-26]: https://github.com/thoughtbot/suspenders/commit/53b2fea247740eef92d8e63a144ab66c1109add7
+[upstream-27]: https://github.com/thoughtbot/suspenders/commit/8e75eef9fae0b44e3300704ea91c454318808925
+[upstream-28]: https://github.com/thoughtbot/suspenders/commit/8974398f31e6cb276798da36366ab76510706025
+[upstream-29]: https://github.com/thoughtbot/suspenders/commit/6ac8874496e15da3f0e5906cbb2b5e7261be00ca
+[upstream-30]: https://github.com/thoughtbot/suspenders/commit/e077da95487698467080f94aa397147a6617a9f8
+[upstream-31]: https://github.com/thoughtbot/suspenders/commit/f733bb413ad92edcf81d3ce3273ccb3382878be9
+[upstream-32]: 
 
 
 1.1.0 (June 23, 2015)

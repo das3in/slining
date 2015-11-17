@@ -59,10 +59,11 @@ module Slining
       build :set_ruby_to_version_being_used
 
       if options[:heroku]
-        build :setup_heroku_specific_gems
+        build :set_up_heroku_specific_gems
       end
 
       bundle_command 'install'
+      build :configure_simple_form
     end
 
     def setup_database
@@ -79,16 +80,19 @@ module Slining
       say 'Setting up the development environment'
       build :raise_on_delivery_errors
       build :set_test_delivery_method
+      build :add_bullet_gem_configuration
       build :raise_on_unpermitted_parameters
       build :provide_setup_script
       build :provide_dev_prime_task
       build :configure_generators
       build :configure_i18n_for_missing_translations
+      build :configure_quiet_assets
     end
 
     def setup_test_environment
       say 'Setting up the test environment'
       build :set_up_factory_girl_for_rspec
+      build :generate_factories_file
       build :set_up_hound
       build :generate_rspec
       build :configure_rspec
@@ -100,6 +104,7 @@ module Slining
       build :configure_i18n_for_test_environment
       build :configure_i18n_tasks
       build :configure_action_mailer_in_specs
+      build :configure_capybara_webkit
     end
 
     def setup_production_environment
@@ -135,7 +140,6 @@ module Slining
       build :configure_action_mailer
       build :configure_active_job
       build :configure_time_formats
-      build :configure_simple_form
       build :disable_xml_params
       build :fix_i18n_deprecation_warning
       build :setup_default_rake_task
@@ -164,6 +168,7 @@ module Slining
         build :set_heroku_remotes
         build :set_heroku_rails_secrets
         build :provide_deploy_script
+        build :configure_automatic_deployment
       end
     end
 

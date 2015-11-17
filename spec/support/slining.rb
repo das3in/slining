@@ -12,9 +12,10 @@ module SliningTestHelpers
   def run_slining(arguments = nil)
     Dir.chdir(tmp_path) do
       Bundler.with_clean_env do
-        ENV['TESTING'] = '1'
-
-        %x(#{slining_bin} #{APP_NAME} #{arguments})
+        add_fakes_to_path
+        `
+          #{slining_bin} #{APP_NAME} #{arguments}
+        `
       end
     end
   end
@@ -29,21 +30,28 @@ module SliningTestHelpers
     end
   end
 
+  def add_fakes_to_path
+    ENV["PATH"] = "#{support_bin}:#{ENV["PATH"]}"
+  end
+
   def project_path
     @project_path ||= Pathname.new("#{tmp_path}/#{APP_NAME}")
   end
 
   private
+    def tmp_path
+      @tmp_path ||= Pathname.new("#{root_path}/tmp")
+    end
 
-  def tmp_path
-    @tmp_path ||= Pathname.new("#{root_path}/tmp")
-  end
+    def slining_bin
+      File.join(root_path, 'bin', 'slining')
+    end
 
-  def slining_bin
-    File.join(root_path, 'bin', 'slining')
-  end
+    def support_bin
+      File.join(root_path, "spec", "fakes", "bin")
+    end
 
-  def root_path
-    File.expand_path('../../../', __FILE__)
-  end
+    def root_path
+      File.expand_path('../../../', __FILE__)
+    end
 end

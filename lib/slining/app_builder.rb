@@ -1,6 +1,14 @@
+require "forwardable"
+
 module Slining
   class AppBuilder < Rails::AppBuilder
     include Slining::Actions
+    extend Forwardable
+
+    def delegators :heroku_adapter,
+                   :set_heroku_remotes,
+                   :set_up_heroku_specific_gems,
+                   :set_heroku_rails_secrets
 
     def readme
       template 'README.md.erb', 'README.md'
@@ -19,9 +27,34 @@ module Slining
       )
     end
 
+    def add_bullet_gem_configuration
+      config = <<-RUBY
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.bullet_logger = true
+    Bullet.rails_logger = true
+  end
+
+      RUBY
+
+      inject_into_file(
+        "config/environments/development.rb",
+        config,
+        after: "config.action_mailer.raise_delivery_errors = true\n",
+      )
+    end
+
     def raise_on_unpermitted_parameters
       config = <<-RUBY
     config.action_controller.action_on_unpermitted_parameters = :raise
+      RUBY
+
+      inject_into_class "config/application.rb", "Application", config
+    end
+
+    def configure_quiet_assets
+      config = <<-RUBY
+    config.quiet_assets = true
       RUBY
 
       inject_into_class "config/application.rb", "Application", config
@@ -56,6 +89,10 @@ module Slining
 
     def set_up_factory_girl_for_rspec
       copy_file 'factory_girl_rspec.rb', 'spec/support/factory_girl.rb'
+    end
+
+    def generate_factories_file
+      copy_file "factories.rb", "spec/factories.rb"
     end
 
     def set_up_hound
@@ -185,23 +222,12 @@ end
       create_file '.ruby-version', "#{Slining::RUBY_VERSION}\n"
     end
 
-    def setup_heroku_specific_gems
-      inject_into_file(
-        "Gemfile",
-        %{\n\s\sgem "rails_stdout_logging"},
-        after: /group :staging, :production do/
-      )
-    end
-
     def enable_database_cleaner
       copy_file 'database_cleaner_rspec.rb', 'spec/support/database_cleaner.rb'
     end
 
     def provide_shoulda_matchers_config
-      copy_file(
-        "shoulda_matchers_config_rspec.rb"
-        "spec/support/shoulda_matchers_config.rb"
-      )
+      copy_file "shoulda_matchers_config_rspec.rb", "spec/support/shoulda_matchers.rb"
     end
 
     def configure_spec_support_features
@@ -242,6 +268,10 @@ end
       copy_file 'action_mailer.rb', 'spec/support/action_mailer.rb'
     end
 
+    def configure_capybara_webkit
+      copy_file "capybara_webkit.rb", "spec/support/capybara_webkit.rb"
+    end
+
     def configure_time_formats
       remove_file "config/locales/en.yml"
       template "config_locales_en.yml.erb", "config/locales/en.yml"
@@ -262,7 +292,6 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
     def configure_action_mailer
       action_mailer_host "development", %{"localhost:3000"}
       action_mailer_host "test", %{"www.example.com"}
-      action_mailer_host "staging", %{ENV.fetch("APPLICATION_HOST")}
       action_mailer_host "production", %{ENV.fetch("APPLICATION_HOST")}
     end
 
@@ -344,35 +373,6 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       create_production_heroku_app(flags)
     end
 
-    def set_heroku_remotes
-      remotes = <<-SHELL
-
-# Set up the staging and production apps.
-#{join_heroku_app('staging')}
-#{join_heroku_app('production')}
-git config heroku.remote staging
-      SHELL
-
-      append_file 'bin/setup', remotes
-    end
-
-    def join_heroku_app(environment)
-      heroku_app_name = heroku_app_name_for(environment)
-      <<-SHELL
-if heroku join --app #{heroku_app_name} &> /dev/null; then
-  git remote add #{environment} git@heroku.com:#{heroku_app_name}.git || true
-  printf 'You are a collaborator on the "#{heroku_app_name}" Heroku app\n'
-else
-  printf 'Ask for access to the "#{heroku_app_name}" Heroku app\n'
-fi
-      SHELL
-    end
-
-    def set_heroku_rails_secrets
-      %w(staging production).each do |environment|
-        run_heroku "config:add SECRET_KEY_BASE=#{generate_secret}", environment
-      end
-    end
 
     def set_heroku_serve_static_files
       %w(staging production).each do |environment|
@@ -398,9 +398,21 @@ you can deploy to staging and production with:
       run "chmod a+x bin/deploy"
     end
 
+    def configure_automatic_deployment
+      staging_remote_name = heroku_app_name_for("staging")
+      deploy_command = <<-YML.strip_heredoc
+      deployment:
+        staging:
+          branch: master
+          commands:
+            - bin/deploy staging
+      YML
+
+      append_file "circle.yml", deploy_command
+    end
+
     def create_github_repo(repo_name)
-      path_addition = override_path_for_tests
-      run "#{path_addition} hub create #{repo_name}"
+      run "hub create #{repo_name}"
     end
 
     def setup_segment
@@ -492,20 +504,12 @@ end
       uncomment_lines("config/environments/#{environment}.rb", config)
     end
 
-    def override_path_for_tests
-      if ENV['TESTING']
-        support_bin = File.expand_path(File.join('..', '..', 'spec', 'fakes', 'bin'))
-        "PATH=#{support_bin}:$PATH"
-      end
-    end
-
     def run_heroku(command, environment)
-      path_addition = override_path_for_tests
-      run "#{path_addition} heroku #{command} --remote #{environment}"
+      run "heroku #{command} --remote #{environment}"
     end
 
-    def generate_secret
-      SecureRandom.hex(64)
+    def heroku_adapter
+      @heroku_adapter ||= Adapters::Heroku.new(self)
     end
 
     def serve_static_files_line
