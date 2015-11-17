@@ -41,9 +41,11 @@ module Slining
       invoke :setup_stylesheets
       invoke :copy_miscellaneous_files
       invoke :customize_error_pages
+      invoke :remove_config_comment_lines
       invoke :remove_routes_comment_lines
       invoke :setup_git
       invoke :setup_database
+      invoke :setup_dotfiles
       invoke :create_heroku_apps
       invoke :create_github_repo
       invoke :setup_segment
@@ -176,6 +178,10 @@ module Slining
       build :setup_segment
     end
 
+    def setup_dotfiles
+      build :copy_dotfiles
+    end
+
     def setup_gitignore
       build :gitignore_files
     end
@@ -202,6 +208,10 @@ module Slining
     def customize_error_pages
       say 'Customizing the 500/404/422 pages'
       build :customize_error_pages
+    end
+
+    def remove_config_comment_lines
+      build :remove_config_comment_lines
     end
 
     def remove_routes_comment_lines

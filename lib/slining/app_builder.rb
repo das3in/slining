@@ -86,7 +86,7 @@ module Slining
       config = <<-RUBY
 
   # Ensure requests are only served from one, canonical host name
-  config.middleware.use Rack::CanonicalHost, ENV.fetch("HOST")
+  config.middleware.use Rack::CanonicalHost, ENV.fetch("APPLICATION_HOST")
       RUBY
 
       inject_into_file(
@@ -113,7 +113,7 @@ module Slining
     def setup_asset_host
       replace_in_file 'config/environments/production.rb',
         "# config.action_controller.asset_host = 'http://assets.example.com'",
-        'config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV.fetch("HOST"))'
+        'config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))'
 
       replace_in_file 'config/initializers/assets.rb',
         "config.assets.version = '1.0'",
@@ -255,8 +255,8 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
     def configure_action_mailer
       action_mailer_host "development", %{"localhost:#{port}"}
       action_mailer_host "test", %{"www.example.com"}
-      action_mailer_host "staging", %{ENV.fetch("HOST")}
-      action_mailer_host "production", %{ENV.fetch("HOST")}
+      action_mailer_host "staging", %{ENV.fetch("APPLICATION_HOST")}
+      action_mailer_host "production", %{ENV.fetch("APPLICATION_HOST")}
     end
 
     def configure_active_job
@@ -308,6 +308,10 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
         run "mkdir #{dir}"
         run "touch #{dir}/.keep"
       end
+    end
+
+    def copy_dotfiles
+      directory("dotfiles",".")
     end
 
     def init_git
@@ -422,6 +426,28 @@ you can deploy to staging and production with:
       %w(500 404 422).each do |page|
         inject_into_file "public/#{page}.html", meta_tags, after: "<head>\n"
         replace_in_file "public/#{page}.html", /<!--.+-->\n/, ''
+      end
+    end
+
+    def remove_config_comment_lines
+      config_files = [
+        "application.rb",
+        "environment.rb",
+        "environments/development.rb",
+        "environments/production.rb",
+        "environments/test.rb",
+      ]
+
+      config_files.each do |config_file|
+        path = File.join(destination_root, "config/#{config_file}")
+
+        accepted_content = File.readlines(path).reject do |line|
+          line =~ /^.*#.*$/ || line =~ /^$\n/
+        end
+
+        File.open(path, "w") do |file|
+          accepted_content.each { |line| file.puts line }
+        end
       end
     end
 

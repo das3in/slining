@@ -29,6 +29,10 @@ RSpec.describe "Slining a new project with default configuration" do
     expect(ruby_version_file).to eq "#{RUBY_VERSION}\n"
   end
 
+  it "copies dotfiles" do
+    expect(File).to exist("#{project_path}/.ctags")
+  end
+
   it "loads secret_key_base from env" do
     secrets_file = IO.read("#{project_path}/config/secrets.yml")
 
@@ -107,6 +111,12 @@ RSpec.describe "Slining a new project with default configuration" do
       to match(/^ +config.action_mailer.delivery_method = :test$/)
   end
 
+  it "uses APPLICATION_HOST, not HOST in the production config" do
+    prod_env_file = IO.read("#{project_path}/config/environments/production.rb")
+    expect(prod_env_file).to match(/"APPLICATION_HOST"/)
+    expect(prod_env_file).not_to match(/"HOST"/)
+  end
+
   it "configs active job queue adapter" do
     application_config = IO.read("#{project_path}/config/application.rb")
     test_config = IO.read("#{project_path}/config/environments/test.rb")
@@ -126,6 +136,21 @@ RSpec.describe "Slining a new project with default configuration" do
     bin_stubs = %w(rake rails rspec)
     bin_stubs.each do |bin_stub|
       expect(IO.read("#{project_path}/bin/#{bin_stub}")).to match(spring_line)
+    end
+  end
+
+  it "removes comments and extra newlines from config files" do
+    config_files = [
+      IO.read("#{project_path}/config/application.rb"),
+      IO.read("#{project_path}/config/environment.rb"),
+      IO.read("#{project_path}/config/environments/development.rb"),
+      IO.read("#{project_path}/config/environments/production.rb"),
+      IO.read("#{project_path}/config/environments/test.rb"),
+    ]
+
+    config_files.each do |file|
+      expect(file).not_to match(/.*#.*/)
+      expect(file).not_to match(/^$\n/)
     end
   end
 
