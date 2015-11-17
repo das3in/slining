@@ -1,7 +1,7 @@
 # Slining
 
 Slining is the Silver Lining to Vaporware's Rails development, i.e. the base Rails application used at
-[vaporware](http://vaporwa.re). It's a forked project from [thoughtbot's suspenders](http://github.com/thoughtbot/suspenders).
+[vaporware](http://vaporwa.re). It's a forked project from [thoughtbot's suspenders](https://github.com/thoughtbot/suspenders).
 
 ## Installation
 
@@ -40,7 +40,7 @@ It includes application gems like:
 * [Postgres](https://github.com/ged/ruby-pg) for access to the Postgres database
 * [Rack Canonical Host](https://github.com/tylerhunt/rack-canonical-host) to
   ensure all requests are served from the same domain
-* [Rack Timeout](https://github.com/kch/rack-timeout) to abort requests that are
+* [Rack Timeout](https://github.com/heroku/rack-timeout) to abort requests that are
   taking too long
 * [Recipient Interceptor](https://github.com/croaky/recipient_interceptor) to
   avoid accidentally sending emails to real people from staging
@@ -80,7 +80,7 @@ And testing gems like:
 * [RSpec Mocks](https://github.com/rspec/rspec-mocks) for stubbing and spying
 * [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers) for common
   RSpec matchers
-* [Timecop](https://github.com/jtrupiano/timecop-console) for testing time
+* [Timecop](https://github.com/ferndopolis/timecop-console) for testing time
 
 ## Other goodies
 
@@ -101,8 +101,8 @@ Slining also comes with:
 * The analytics adapter [Segment][segment] (and therefore config for Google
   Analytics, Intercom, Facebook Ads, Twitter Ads, etc.)
 
-[setup]: http://robots.thoughtbot.com/bin-setup
-[compress]: http://robots.thoughtbot.com/content-compression-with-rack-deflater/
+[setup]: https://robots.thoughtbot.com/bin-setup
+[compress]: https://robots.thoughtbot.com/content-compression-with-rack-deflater
 [pool]: https://devcenter.heroku.com/articles/concurrency-and-database-connections
 [binstub]: https://github.com/thoughtbot/suspenders/pull/282
 [i18n]: https://github.com/thoughtbot/suspenders/pull/304

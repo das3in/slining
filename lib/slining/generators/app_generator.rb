@@ -78,6 +78,7 @@ module Slining
 
     def setup_development_environment
       say 'Setting up the development environment'
+      build :raise_on_missing_assets_in_test
       build :raise_on_delivery_errors
       build :set_test_delivery_method
       build :add_bullet_gem_configuration
@@ -144,7 +145,7 @@ module Slining
       build :fix_i18n_deprecation_warning
       build :setup_default_rake_task
       build :configure_puma
-      build :setup_foreman
+      build :set_up_forego
     end
 
     def setup_stylesheets

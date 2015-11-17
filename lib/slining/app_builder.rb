@@ -14,6 +14,14 @@ module Slining
       template 'README.md.erb', 'README.md'
     end
 
+    def raise_on_missing_assets_in_test
+      inject_into_file(
+        "config/environments/test.rb",
+        "\n  config.assets.raise_runtime_errors = true",
+        after: "Rails.application.configure do"
+      )
+    end
+
     def raise_on_delivery_errors
       replace_in_file 'config/environments/development.rb',
         'raise_delivery_errors = false', 'raise_delivery_errors = true'
@@ -318,7 +326,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       copy_file "puma.rb", "config/puma.rb"
     end
 
-    def setup_foreman
+    def set_up_forego
       copy_file 'sample.env', '.sample.env'
       copy_file 'Procfile', 'Procfile'
     end

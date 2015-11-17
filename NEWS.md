@@ -20,10 +20,13 @@
 * Slining command line responds to `-v` and `--version` options [upstream-22]
 * Configure simple_form earlier [upstream-23], [upstream-28]
 * Remove old deprecation [upstream-24]
-* Removed action_mailer_host in staging [upstream-25]
+* Removed `action_mailer_host` in staging [upstream-25]
 * Cleanup generated `bin/setup` file and rake binstub [upstream-26], [upstream-27]
-* Add bullet as development dependency [upstream-30]
+* Add `bullet` as development dependency [upstream-30]
 * Add adapter for heroku actions [upstream-31]
+* Replace foreman with heroku local ([Forego]) [upstream-32]
+* Add RELEASING document [upstream-33]
+* Raise on missing Sprockets assets in test [upstream-34]
 
 [recommended by Heroku]: https://devcenter.heroku.com/changelog-items/594
 [upstream-1]: https://github.com/thoughtbot/suspenders/commit/f34ab5189300a57e14c28aaeca17bd5573080f1d
@@ -57,8 +60,10 @@
 [upstream-29]: https://github.com/thoughtbot/suspenders/commit/6ac8874496e15da3f0e5906cbb2b5e7261be00ca
 [upstream-30]: https://github.com/thoughtbot/suspenders/commit/e077da95487698467080f94aa397147a6617a9f8
 [upstream-31]: https://github.com/thoughtbot/suspenders/commit/f733bb413ad92edcf81d3ce3273ccb3382878be9
-[upstream-32]: 
-
+[upstream-32]: https://github.com/thoughtbot/suspenders/commit/6b7614a8dc7ff2a7dd32d087039e49fd5984a35d
+[Forego]: https://github.com/ddollar/forego
+[upstream-33]: https://github.com/thoughtbot/suspenders/commit/e96f8450ebfebacd13973d091fcbc9115ace00bc
+[upstream-34]: https://github.com/thoughtbot/suspenders/commit/dd6b2037e5a7f5cd99b96187be143129af9ab2cb
 
 1.1.0 (June 23, 2015)
 * Added HAML and HAML Rails
