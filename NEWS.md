@@ -3,6 +3,7 @@
 * Upgraded to Ruby 2.2.3
 * Upgraded to RSpec 3.3
 * Replaced TravisCI with CircleCI
+* Rename Dev Seeds
 
 1.1.0 (June 23, 2015)
 * Added HAML and HAML Rails
