@@ -1,3 +1,21 @@
+1.3.0 (December 27, 2015)
+* Ignored `.env.local` instead of `.env` [upstream-8739344046cfbca5b74dcb4d9aba3c6e9c805463]
+* Add lang attribute to html element in layout [upstream-644dc50bed9c1f520a821f38e8555164c1140bd8]
+* Set puma workers to 1 in .sample.env to play well with web-console and ember-cli-rails [upstream-79b83dbbd0959db0502ffbf603ac6ce5b1768517]
+* Generate .env instead of .sample.env [upstream-e308357a07a4d4631cd65af2c5348de8a32b7779]
+* Use `pry-byebug` instead of `byebug` [upstream-6508b6ad3c0640d87f701608a5cc6699988b5b9d]
+* Upgraded rspec-rails, Ruby, and Rails
+* Remove i18n-tasks [upstream-77d3310dd1d531a04aae4e4621fc55ff8168d7e5] [upstream-67c038a2d44b6a44b3a115aadcaedb564cf98dd0]
+* Remove database `host` key for Linux support
+
+[upstream-8739344046cfbca5b74dcb4d9aba3c6e9c805463]: https://github.com/thoughtbot/suspenders/commit/8739344046cfbca5b74dcb4d9aba3c6e9c805463
+[upstream-644dc50bed9c1f520a821f38e8555164c1140bd8]: https://github.com/thoughtbot/suspenders/commit/644dc50bed9c1f520a821f38e8555164c1140bd8
+[upstream-79b83dbbd0959db0502ffbf603ac6ce5b1768517]: https://github.com/thoughtbot/suspenders/commit/79b83dbbd0959db0502ffbf603ac6ce5b1768517
+[upstream-e308357a07a4d4631cd65af2c5348de8a32b7779]: https://github.com/thoughtbot/suspenders/commit/e308357a07a4d4631cd65af2c5348de8a32b7779
+[upstream-6508b6ad3c0640d87f701608a5cc6699988b5b9d]: https://github.com/thoughtbot/suspenders/commit/6508b6ad3c0640d87f701608a5cc6699988b5b9d
+[upstream-77d3310dd1d531a04aae4e4621fc55ff8168d7e5]: https://github.com/thoughtbot/suspenders/commit/77d3310dd1d531a04aae4e4621fc55ff8168d7e5
+[upstream-67c038a2d44b6a44b3a115aadcaedb564cf98dd0]: https://github.com/thoughtbot/suspenders/commit/67c038a2d44b6a44b3a115aadcaedb564cf98dd0
+
 1.2.0 (November 17, 2015)
 * Changed addon references for Heroku [upstream-1]
 * Upgraded to Ruby 2.2.3

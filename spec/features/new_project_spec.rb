@@ -30,7 +30,9 @@ RSpec.describe "Slining a new project with default configuration" do
   end
 
   it "copies dotfiles" do
-    expect(File).to exist("#{project_path}/.ctags")
+    %w[.ctags .env].each do |dotfile|
+      expect(File).to exist("#{project_path}/#{dotfile}")
+    end
   end
 
   it "loads secret_key_base from env" do
@@ -98,14 +100,6 @@ RSpec.describe "Slining a new project with default configuration" do
     end
   end
 
-  it "adds specs for missing or unused translations" do
-    expect(File).to exist("#{project_path}/spec/i18n_spec.rb")
-  end
-
-  it "configs i18n-tasks" do
-    expect(File).to exist("#{project_path}/config/i18n-tasks.yml")
-  end
-
   it "evaluates en.yml.erb" do
     locales_en_file = IO.read("#{project_path}/config/locales/en.yml")
     app_name = SliningTestHelpers::APP_NAME
@@ -127,6 +121,12 @@ RSpec.describe "Slining a new project with default configuration" do
     prod_env_file = IO.read("#{project_path}/config/environments/production.rb")
     expect(prod_env_file).to match(/"APPLICATION_HOST"/)
     expect(prod_env_file).not_to match(/"HOST"/)
+  end
+
+  it "configures language in html element" do
+    layout_path = "/app/views/layouts/application.html.erb"
+    layout_file = IO.read("#{project_path}#{layout_path}")
+    expect(layout_file).to match(/<html lang="en">/)
   end
 
   it "configs active job queue adapter" do

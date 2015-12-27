@@ -263,11 +263,6 @@ end
       raise_on_missing_translations_in("test")
     end
 
-    def configure_i18n_tasks
-      run "cp $(i18n-tasks gem-path)/templates/rspec/i18n_spec.rb spec/"
-      copy_file "config_i18n_tasks.yml", "config/i18n-tasks.yml"
-    end
-
     def configure_background_jobs_for_rspec
       run 'rails g delayed_job:active_record'
     end
@@ -327,8 +322,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
     end
 
     def set_up_forego
-      copy_file 'sample.env', '.sample.env'
-      copy_file 'Procfile', 'Procfile'
+      copy_file "Procfile", "Procfile"
     end
 
     def setup_stylesheets
