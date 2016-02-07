@@ -2,6 +2,7 @@
 * Fixed error names
 * Enabled Heroku Pipeline Support [upstream-d53de08ef0b7588c5916585916b890e417741dd5]
 * Switch from Airbrake to Honeybadger
+* Remove i18n deprecation warning
 
 [upstream-d53de08ef0b7588c5916585916b890e417741dd5]: https://github.com/thoughtbot/suspenders/commit/d53de08ef0b7588c5916585916b890e417741dd5
 
