@@ -3,6 +3,9 @@
 * Enabled Heroku Pipeline Support [upstream-d53de08ef0b7588c5916585916b890e417741dd5]
 * Switch from Airbrake to Honeybadger
 * Remove i18n deprecation warning
+* Simplify Rails AppBuilder methods for Gemfile and gitignore.
+* Generate applications with `rack_mini_profiler` (disabled by default, enabled
+  by setting `RACK_MINI_PROFILER=1`)
 
 [upstream-d53de08ef0b7588c5916585916b890e417741dd5]: https://github.com/thoughtbot/suspenders/commit/d53de08ef0b7588c5916585916b890e417741dd5
 

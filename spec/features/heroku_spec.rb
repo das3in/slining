@@ -66,7 +66,7 @@ RSpec.describe "Heroku" do
 
     it "includes application name in app.json file" do
       app_json_file = IO.read("#{project_path}/app.json")
-      app_name = SuspendersTestHelpers::APP_NAME.dasherize
+      app_name = SliningTestHelpers::APP_NAME.dasherize
 
       expect(app_json_file).to match(/"name":"#{app_name}"/)
     end

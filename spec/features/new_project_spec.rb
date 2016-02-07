@@ -7,6 +7,19 @@ RSpec.describe "Slining a new project with default configuration" do
     run_slining
   end
 
+  it "uses custom Gemfile" do
+    gemfile_file = IO.read("#{project_path}/Gemfile")
+    expect(gemfile_file).to match(
+      /^ruby "#{Slining::RUBY_VERSION}"$/,
+    )
+    expect(gemfile_file).to match(
+      /^gem "autoprefixer-rails"$/,
+    )
+    expect(gemfile_file).to match(
+      /^gem "rails", "#{Slining::RAILS_VERSION}"$/,
+    )
+  end
+
   it "ensures project specs pass" do
     Dir.chdir(project_path) do
       Bundler.with_clean_env do
@@ -69,6 +82,23 @@ RSpec.describe "Slining a new project with default configuration" do
     expect(hound_config_file).to include "enabled: true"
   end
 
+  it "ensures Gemfile contains `rack-mini-profiler`" do
+    gemfile = IO.read("#{project_path}/Gemfile")
+
+    expect(gemfile).to include %{gem "rack-mini-profiler", require: false}
+  end
+
+  it "ensures .sample.env defaults to RACK_MINI_PROFILER=0" do
+    env = IO.read("#{project_path}/.env")
+
+    expect(env).to include "RACK_MINI_PROFILER=0"
+  end
+
+  it "creates a rack-mini-profiler initializer" do
+    expect(File).
+      to exist("#{project_path}/config/initializers/rack_mini_profiler.rb")
+  end
+
   it "ensures newrelic.yml reads NewRelic license from env" do
     newrelic_file = IO.read("#{project_path}/config/newrelic.yml")
 
@@ -88,7 +118,7 @@ RSpec.describe "Slining a new project with default configuration" do
     result = IO.read("#{project_path}/config/application.rb")
 
     expect(result).to match(
-      /^config.action_controller.action_on_unpermitted_parameters = :raise$/
+      /^ +config.action_controller.action_on_unpermitted_parameters = :raise$/
     )
   end
 
@@ -96,7 +126,7 @@ RSpec.describe "Slining a new project with default configuration" do
     result = IO.read("#{project_path}/config/application.rb")
 
     expect(result).to match(
-      /^config.quiet_assets = true$/
+      /^ +config.quiet_assets = true$/
     )
   end
 
@@ -105,7 +135,7 @@ RSpec.describe "Slining a new project with default configuration" do
       environment_file =
         IO.read("#{project_path}/config/environments/#{environment}.rb")
       expect(environment_file).to match(
-        /^config.action_view.raise_on_missing_translations = true$/
+        /^ +config.action_view.raise_on_missing_translations = true$/
       )
     end
   end
@@ -124,7 +154,7 @@ RSpec.describe "Slining a new project with default configuration" do
   it "configs :test email delivery method for development" do
     dev_env_file = IO.read("#{project_path}/config/environments/development.rb")
     expect(dev_env_file).
-      to match(/^config.action_mailer.delivery_method = :test$/)
+      to match(/^ +config.action_mailer.delivery_method = :test$/)
   end
 
   it "uses APPLICATION_HOST, not HOST in the production config" do
@@ -144,24 +174,24 @@ RSpec.describe "Slining a new project with default configuration" do
     test_config = IO.read("#{project_path}/config/environments/test.rb")
 
     expect(application_config).to match(
-      /^config.active_job.queue_adapter = :delayed_job$/
+      /^ +config.active_job.queue_adapter = :delayed_job$/
     )
     expect(test_config).to match(
-      /^config.active_job.queue_adapter = :inline$/
+      /^ +config.active_job.queue_adapter = :inline$/
     )
   end
 
   it "configs bullet gem in development" do
     test_config = IO.read("#{project_path}/config/environments/development.rb")
 
-    expect(test_config).to match /^Bullet.enable = true$/
-    expect(test_config).to match /^Bullet.bullet_logger = true$/
-    expect(test_config).to match /^Bullet.rails_logger = true$/
+    expect(test_config).to match /^ +Bullet.enable = true$/
+    expect(test_config).to match /^ +Bullet.bullet_logger = true$/
+    expect(test_config).to match /^ +Bullet.rails_logger = true$/
   end
 
   it "configs missing assets to raise in test" do
     test_config = IO.read("#{project_path}/config/environments/test.rb")
-    expect(test_config).to match /^config.assets.raise_runtime_errors = true$/
+    expect(test_config).to match /^ +config.assets.raise_runtime_errors = true$/
   end
 
   it "adds spring to binstubs" do
@@ -193,7 +223,7 @@ RSpec.describe "Slining a new project with default configuration" do
   end
 
   def app_name
-    SuspendersTestHelpers::APP_NAME
+    SliningTestHelpers::APP_NAME
   end
 
   def analytics_partial

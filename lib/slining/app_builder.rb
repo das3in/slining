@@ -20,6 +20,21 @@ module Slining
       template 'README.md.erb', 'README.md'
     end
 
+    def gitignore
+      copy_file "slining_gitignore", ".gitignore"
+    end
+
+    def gemfile
+      template "Gemfile.erb", "Gemfile"
+    end
+
+    def setup_rack_mini_profiler
+      copy_file(
+        "rack_mini_profiler.rb",
+        "config/initializers/rack_mini_profiler.rb",
+      )
+    end
+
     def raise_on_missing_assets_in_test
       inject_into_file(
         "config/environments/test.rb",
@@ -137,7 +152,7 @@ module Slining
       config = <<-RUBY
 
 if ENV.fetch("HEROKU_APP_NAME", "").include?("staging-pr-")
-  ENV["APPLICATION_HOST"] = ENV["HEROKU_APP_NAME"] + ".herokuapp.com"
+  ENV["APPLICATION_HOST"] = ENV["HEROKU_APP_NAME"] ".herokuapp.com"
 end
 
   # Ensure requests are only served from one, canonical host name
@@ -229,11 +244,6 @@ end
 
     def create_database
       bundle_command 'exec rake db:create db:migrate'
-    end
-
-    def replace_gemfile
-      remove_file 'Gemfile'
-      template 'Gemfile.erb', 'Gemfile'
     end
 
     def set_ruby_to_version_being_used
@@ -333,9 +343,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
                 "app/assets/stylesheets/application.scss"
     end
 
-    def gitignore_files
-      remove_file '.gitignore'
-      copy_file 'slining_gitignore', '.gitignore'
+    def setup_default_directories
       [
         'app/views/pages',
         'spec/lib',
@@ -345,8 +353,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
         'spec/support/mixins',
         'spec/support/shared_examples'
       ].each do |dir|
-        run "mkdir #{dir}"
-        run "touch #{dir}/.keep"
+        empty_directory_with_keep_file dir
       end
     end
 
@@ -356,12 +363,6 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
 
     def init_git
       run 'git init'
-    end
-
-    def create_production_heroku_app(flags)
-      app_name = heroku_app_name_for("production")
-
-      run_heroku "create #{app_name} #{flags}", "production"
     end
 
     def create_heroku_apps(flags)

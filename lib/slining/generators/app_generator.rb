@@ -55,7 +55,6 @@ module Slining
     end
 
     def customize_gemfile
-      build :replace_gemfile
       build :set_ruby_to_version_being_used
 
       if options[:heroku]
@@ -144,6 +143,7 @@ module Slining
       build :setup_default_rake_task
       build :configure_puma
       build :set_up_forego
+      build :setup_rack_mini_profiler
     end
 
     def setup_stylesheets
@@ -153,8 +153,8 @@ module Slining
 
     def setup_git
       if !options[:skip_git]
-        say 'Initializing git'
-        invoke :setup_gitignore
+        say "Initializing git"
+        invoke :setup_default_directories
         invoke :init_git
       end
     end
@@ -190,8 +190,8 @@ module Slining
       build :copy_dotfiles
     end
 
-    def setup_gitignore
-      build :gitignore_files
+    def setup_default_directories
+      build :setup_default_directories
     end
 
     def setup_bundler_audit

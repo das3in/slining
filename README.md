@@ -213,7 +213,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 Thank you, [contributors]!
 
 ## License
-Slining is Copyright © 2015+ vaporware. MIT Licensed, see [LICENSE] for details.
+Slining is Copyright © 2015-2016+ vaporware. MIT Licensed, see [LICENSE] for details.
 
 [gem]: https://rubygems.org/gems/slining
 [circleci]: https://circleci.com/gh/vaporware/slining
