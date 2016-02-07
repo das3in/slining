@@ -1,3 +1,10 @@
+1.4.0 (February 7, 2016)
+* Fixed error names
+* Enabled Heroku Pipeline Support [upstream-d53de08ef0b7588c5916585916b890e417741dd5]
+* Switch from Airbrake to Honeybadger
+
+[upstream-d53de08ef0b7588c5916585916b890e417741dd5]: https://github.com/thoughtbot/suspenders/commit/d53de08ef0b7588c5916585916b890e417741dd5
+
 1.3.0 (December 27, 2015)
 * Ignored `.env.local` instead of `.env` [upstream-8739344046cfbca5b74dcb4d9aba3c6e9c805463]
 * Add lang attribute to html element in layout [upstream-644dc50bed9c1f520a821f38e8555164c1140bd8]

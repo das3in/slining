@@ -164,9 +164,12 @@ module Slining
       if options[:heroku]
         say "Creating Heroku apps"
         build :create_heroku_apps, options[:heroku_flags]
+        build :provide_review_apps_setup_script
         build :set_heroku_serve_static_files
         build :set_heroku_remotes
         build :set_heroku_rails_secrets
+        build :create_heroku_pipelines_config_file
+        build :create_heroku_pipeline
         build :provide_deploy_script
         build :configure_automatic_deployment
       end
@@ -226,7 +229,7 @@ module Slining
 
     def outro
       say 'Congratulations! You just found the silver lining.'
-      say "Remember to run 'rails generate airbrake' with your API key."
+      say honeybadger_outro
     end
 
     protected
@@ -237,6 +240,18 @@ module Slining
 
     def using_active_record?
       !options[:skip_active_record]
+    end
+
+    private
+
+    def honeybadger_outro
+      "Run 'bundle exec honeybadger heroku install' with your API key#{honeybadger_message_suffix}."
+    end
+
+    def honeybadger_message_suffix
+      if options[:heroku]
+        " unless you're using the Heroku Honeybadger add-on"
+      end
     end
   end
 end
