@@ -1,3 +1,6 @@
+1.5.0 (March 5, 2016)
+* Pulled upstream updates
+
 1.4.0 (February 7, 2016)
 * Fixed error names
 * Enabled Heroku Pipeline Support [upstream-d53de08ef0b7588c5916585916b890e417741dd5]

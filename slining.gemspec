@@ -16,7 +16,7 @@ rush to build something amazing; don't use it if you like missing deadlines.
 
   s.email = 'support@vaporwa.re'
   s.executables = ['slining']
-  s.extra_rdoc_files = %w[README.md LICENSE]
+  s.extra_rdoc_files = %w[README.md LICENSE.md]
   s.files = `git ls-files`.split("\n")
   s.homepage = 'http://github.com/vaporware/slining'
   s.license = 'MIT'
@@ -32,4 +32,8 @@ rush to build something amazing; don't use it if you like missing deadlines.
 
   s.add_development_dependency 'rspec', '~> 3.4'
   s.add_development_dependency 'codeclimate-test-reporter'
+  s.add_development_dependency 'simple_form', '~> 3.2'
+  s.add_development_dependency 'title', '~> 0.0'
+  s.add_development_dependency 'quiet_assets', '~> 1.1'
+  s.add_development_dependency 'capybara-webkit', '~> 1.8'
 end
