@@ -1,6 +1,7 @@
 The MIT License
 
 Copyright (c) 2015-2016+ vaporware, inc.
+
 Copyright (c) 2008-2016 thoughtbot, inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
