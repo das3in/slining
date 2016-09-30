@@ -5,6 +5,7 @@ RSpec.describe "Slining a new project with default configuration" do
     drop_dummy_database
     remove_project_directory
     run_slining
+    setup_app_dependencies
   end
 
   it "uses custom Gemfile" do

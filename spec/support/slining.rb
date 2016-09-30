@@ -20,6 +20,27 @@ module SliningTestHelpers
     end
   end
 
+  def suspenders_help_command
+    Dir.chdir(tmp_path) do
+      Bundler.with_clean_env do
+        `
+          #{suspenders_bin} -h
+        `
+      end
+    end
+  end
+
+  def setup_app_dependencies
+    if File.exist?(project_path)
+      Dir.chdir(project_path) do
+        Bundler.with_clean_env do
+          `bundle check || bundle install`
+        end
+      end
+    end
+  end
+
+
   def drop_dummy_database
     if File.exist?(project_path)
       Dir.chdir(project_path) do
