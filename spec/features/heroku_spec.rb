@@ -10,9 +10,6 @@ RSpec.describe "Heroku" do
     it "slinings a project for Heroku" do
       app_name = SliningTestHelpers::APP_NAME.dasherize
 
-      expect(FakeHeroku).to(
-        have_gem_included(project_path, "rails_stdout_logging"),
-      )
       expect(FakeHeroku).to have_created_app_for("staging")
       expect(FakeHeroku).to have_created_app_for("production")
       expect(FakeHeroku).to have_configured_vars("staging", "SECRET_KEY_BASE")
@@ -29,19 +26,6 @@ RSpec.describe "Heroku" do
       expect(bin_setup).to include("heroku join --app #{app_name}-staging")
       expect(bin_setup).to include("git config heroku.remote staging")
       expect(File.stat(bin_setup_path)).to be_executable
-      bin_setup_path = "#{project_path}/bin/setup_review_app"
-      bin_setup = IO.read(bin_setup_path)
-
-      expect(bin_setup).to include("heroku run rake db:migrate --app #{app_name}-staging-pr-$1")
-      expect(bin_setup).to include("heroku ps:scale worker=1 --app #{app_name}-staging-pr-$1")
-      expect(bin_setup).to include("heroku restart --app #{app_name}-staging-pr-$1")
-      expect(File.stat(bin_setup_path)).to be_executable
-
-      bin_deploy_path = "#{project_path}/bin/deploy"
-      bin_deploy = IO.read(bin_deploy_path)
-
-      expect(bin_deploy).to include("heroku run rake db:migrate")
-      expect(File.stat(bin_deploy_path)).to be_executable
 
       readme = IO.read("#{project_path}/README.md")
 
@@ -60,16 +44,6 @@ RSpec.describe "Heroku" do
       YML
     end
 
-    it "adds app.json file" do
-      expect(File).to exist("#{project_path}/app.json")
-    end
-
-    it "includes application name in app.json file" do
-      app_json_file = IO.read("#{project_path}/app.json")
-      app_name = SliningTestHelpers::APP_NAME.dasherize
-
-      expect(app_json_file).to match(/"name":"#{app_name}"/)
-    end
   end
 
   context "--heroku with region flag" do

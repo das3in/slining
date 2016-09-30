@@ -7,7 +7,7 @@ RSpec.describe "GitHub" do
   end
 
   it "slining a project with --github option" do
-    repo_name = 'test'
+    repo_name = "test"
     run_slining("--github=#{repo_name}")
 
     expect(FakeGithub).to have_created_repo(repo_name)

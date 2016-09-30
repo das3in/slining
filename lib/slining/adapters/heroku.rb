@@ -46,7 +46,7 @@ module Slining
         end
       end
 
-      def provide_review_apps_setup_script
+      def create_review_apps_setup_script
         app_builder.template(
           "bin_setup_review_app.erb",
           "bin/setup_review_app",
@@ -55,14 +55,14 @@ module Slining
         app_builder.run "chmod a+x bin/setup_review_app"
       end
 
-      def create_heroku_pipelines_config_file
+      def create_heroku_application_manifest_file
         app_builder.template "app.json.erb", "app.json"
       end
 
       def create_heroku_pipeline
-        pipelines_plugin = `heroku plugins | grep pipelines`
+        pipelines_plugin = `heroku help | grep pipelines`
         if pipelines_plugin.empty?
-          puts "You need heroku pipelines plugin. Run: heroku plugins:install heroku-pipelines"
+          puts "You need heroku pipelines plugin. Run: brew upgrade heroku-toolbelt"
           exit 1
         end
 
@@ -78,15 +78,6 @@ module Slining
             -a #{heroku_app_name}-production --stage production",
           "production",
         )
-      end
-
-      def set_heroku_serve_static_files
-        %w(staging production).each do |environment|
-          run_toolbelt_command(
-            "config:add RAILS_SERVE_STATIC_FILES=true",
-            environment,
-          )
-        end
       end
 
       private

@@ -6,14 +6,13 @@ module Slining
     extend Forwardable
 
     def_delegators :heroku_adapter,
-                   :create_heroku_pipelines_config_file,
+                   :create_heroku_application_manifest_file,
                    :create_heroku_pipeline,
                    :create_production_heroku_app,
                    :create_staging_heroku_app,
-                   :provide_review_apps_setup_script,
+                   :create_review_apps_setup_script,
                    :set_heroku_rails_secrets,
                    :set_heroku_remotes,
-                   :set_heroku_serve_static_files,
                    :set_up_heroku_specific_gems
 
     def readme
@@ -83,7 +82,7 @@ module Slining
 
     def configure_quiet_assets
       config = <<-RUBY
-    config.quiet_assets = true
+    config.assets.quiet = true
       RUBY
 
       inject_into_class "config/application.rb", "Application", config
@@ -336,8 +335,8 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       generate 'rspec:install'
     end
 
-    def configure_puma
-      copy_file "puma.rb", "config/puma.rb"
+    def replace_default_puma_configuration
+      copy_file "puma.rb", "config/puma.rb", force: true
     end
 
     def set_up_forego
@@ -377,7 +376,7 @@ Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
       create_production_heroku_app(flags)
     end
 
-    def provide_deploy_script
+    def create_deploy_script
       copy_file "bin_deploy", "bin/deploy"
 
       instructions = <<-MARKDOWN

@@ -12,17 +12,8 @@ module Slining
     class_option :heroku_flags, type: :string, default: "",
       desc: "Set extra Heroku flags"
 
-    class_option :github, type: :string, aliases: "-G", default: nil,
+    class_option :github, type: :string, default: nil,
       desc: "Create Github repository and add remote origin pointed to repo"
-
-    class_option :skip_test_unit, type: :boolean, aliases: "-T", default: true,
-      desc: "Skip Test::Unit files"
-
-    class_option :skip_turbolinks, type: :boolean, default: true,
-      desc: "Skip turbolinks gem"
-
-    class_option :skip_bundle, type: :boolean, aliases: "-B", default: true,
-      desc: "Don't run bundle install"
 
     def finish_template
       invoke :slining_customization
@@ -45,6 +36,7 @@ module Slining
       invoke :remove_routes_comment_lines
       invoke :setup_git
       invoke :setup_database
+      invoke :create_local_heroku_setup
       invoke :setup_dotfiles
       invoke :create_heroku_apps
       invoke :create_github_repo
@@ -56,10 +48,6 @@ module Slining
 
     def customize_gemfile
       build :set_ruby_to_version_being_used
-
-      if options[:heroku]
-        build :set_up_heroku_specific_gems
-      end
 
       bundle_command 'install'
       build :configure_simple_form
@@ -142,7 +130,7 @@ module Slining
       build :configure_time_formats
       build :disable_xml_params
       build :setup_default_rake_task
-      build :configure_puma
+      build :replace_default_puma_configuration
       build :set_up_forego
       build :setup_rack_mini_profiler
     end
@@ -160,17 +148,20 @@ module Slining
       end
     end
 
+    def create_local_heroku_setup
+      say "Creating local Heroku setup"
+      build :create_review_apps_setup_script
+      build :create_deploy_script
+      build :create_heroku_application_manifest_file
+    end
+
     def create_heroku_apps
       if options[:heroku]
         say "Creating Heroku apps"
         build :create_heroku_apps, options[:heroku_flags]
-        build :provide_review_apps_setup_script
-        build :set_heroku_serve_static_files
         build :set_heroku_remotes
         build :set_heroku_rails_secrets
-        build :create_heroku_pipelines_config_file
         build :create_heroku_pipeline
-        build :provide_deploy_script
         build :configure_automatic_deployment
       end
     end
