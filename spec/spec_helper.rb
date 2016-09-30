@@ -1,8 +1,5 @@
 require 'bundler/setup'
 
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
-
 Bundler.require(:default, :test)
 
 require (Pathname.new(__FILE__).dirname + '../lib/slining').expand_path
