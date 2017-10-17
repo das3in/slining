@@ -31,6 +31,7 @@ It includes application gems like:
 
 * [Autoprefixer Rails](https://github.com/ai/autoprefixer-rails) for CSS vendor prefixes
 * [Bootstrap](getbootstrap.com) for fast frontend prototyping
+* [Bugsnag] (https://www.bugsnag.com/) for exception notification
 * [Delayed Job](https://github.com/collectiveidea/delayed_job) for background
   processing
 * [Email Validator](https://github.com/balexand/email_validator) for email
@@ -39,9 +40,7 @@ It includes application gems like:
   helpers
 * [HAML](http://haml.info/) for cleaner view code
 * [High Voltage](https://github.com/thoughtbot/high_voltage) for static pages
-* [Honeybadger](https://honeybadger.io) for exception notification
 * [jQuery Rails](https://github.com/rails/jquery-rails) for jQuery
-* [New Relic RPM](https://github.com/newrelic/rpm) for monitoring performance
 * [Normalize](https://necolas.github.io/normalize.css/) for resetting browser styles
 * [Postgres](https://github.com/ged/ruby-pg) for access to the Postgres database
 * [Rack Canonical Host](https://github.com/tylerhunt/rack-canonical-host) to
