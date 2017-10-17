@@ -31,7 +31,7 @@ It includes application gems like:
 
 * [Autoprefixer Rails](https://github.com/ai/autoprefixer-rails) for CSS vendor prefixes
 * [Bootstrap](getbootstrap.com) for fast frontend prototyping
-* [Bugsnag] (https://www.bugsnag.com/) for exception notification
+* [Bugsnag](https://www.bugsnag.com/) for exception notification
 * [Delayed Job](https://github.com/collectiveidea/delayed_job) for background
   processing
 * [Email Validator](https://github.com/balexand/email_validator) for email
